@@ -15,7 +15,7 @@ Resources:
         - AttributeName: sk # [subscription|detail]
           AttributeType: S
       KeySchema:
-        - AttributeName: id
+        - AttributeName: pk
           KeyType: HASH
-        - AttributeName: realm
+        - AttributeName: sk
           KeyType: RANGE
