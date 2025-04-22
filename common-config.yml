@@ -1,0 +1,6 @@
+org: inflorescence
+service: front-tucker
+frameworkVersion: ">=4"
+configValidationMode: error
+region: ap-southeast-2
+domain: sug-app.link

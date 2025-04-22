@@ -1,0 +1,41 @@
+org: ${file(../common-config.yml):org
+service: ${file(../common-config.yml):service
+app: front
+
+frameworkVersion: ${file(../common-config.yml):frameworkVersion
+configValidationMode: ${file(../common-config.yml):configValidationMode
+
+provider:
+  region: ${file(../common-config.yml):region
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  stackTags:
+    app: tucker
+    service: front-tucker
+  runtime: nodejs22.x
+  memorySize: 128 # MB default allocated lambda function memory
+  timeout: 15 # Increase Lambda timeout for long-running tasks
+  stackName: ${self:service}-${self:provider.stage}
+  versionFunctions: false
+  logRetentionInDays: 15 # CloudWatch log retention period
+
+
+
+functions:
+  cloudfrontHeaders:
+    handler: ./cloudfront.handler
+    events:
+      - cloudFront:
+          eventType: viewer-response
+          origin: "s3://${self:custom.distributionBucket}.s3.amazonaws.com"
+ #   environment:
+ #     APP_DOMAIN: ${self:custom.domain.${self:provider.stage}}
+resources:
+  - ${file(aws-resources/s3/s3.yml)}
+  - ${file(aws-resources/cloudfront/cloudfront.yml)}
+
+custom:
+  distributionBucket: "front-tucker-web-${self:provider.stage}"
+  domain:
+    dev: "dev.${file(../common-config.yml):domain"
+    prod: "prod.${file(../common-config.yml):domain"

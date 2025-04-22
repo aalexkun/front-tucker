@@ -1,0 +1,21 @@
+Resources:
+  CloudFrontDistribution:
+    Enabled: true
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        DefaultRootObject: index.html
+        Restrictions:
+          GeoRestriction:
+            RestrictionType: whitelist
+            Locations:
+              - AU
+              - NZ
+        Aliases:
+          - ${self:custom.domain.${self:provider.stage}}
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          ViewerProtocolPolicy: redirect-to-https

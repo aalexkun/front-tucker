@@ -1,0 +1,68 @@
+org: ${file(../common-config.yml):org
+service: ${file(../common-config.yml):service
+app: tucker
+
+frameworkVersion: ${file(../common-config.yml):frameworkVersion
+configValidationMode: ${file(../common-config.yml):configValidationMode
+
+provider:
+  name: aws
+  region: ${file(../common-config.yml):region
+  stage: ${opt:stage, 'dev'}
+  stackTags:
+    app: tucker
+    service: front-tucker
+  memorySize: 128   # As small as possible
+  timeout: 10   # Latency should not be more than 5 s
+  stackName: ${self:service}-${self:provider.stage}
+  versionFunctions: false
+  logRetentionInDays: 15 # CloudWatch log retention period
+
+  # Api Gateway Quota to protect against cost surge.
+  usagePlan:
+    quota:
+      limit: 5000
+      period: MONTH
+    throttle:
+      burstLimit: 50
+      rateLimit: 20
+
+  # DB
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "dynamodb:PutItem"
+        - "dynamodb:GetItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+        - "dynamodb:BatchGetItem"
+        - "dynamodb:BatchWriteItem"
+        - "dynamodb:Query"
+        - "dynamodb:Scan"
+        - "dynamodb:PartiQLSelect"
+      Resource:
+        - Fn::GetAtt: [ ClassRegistrationTable, Arn ]
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+      Resource: !Sub "arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.dynamoDB.classRegistrationTable}/index/*"
+
+resources:
+  - ${file(aws-resources/dynamo-db/application-table.yml)}
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  dynamoDB:
+    classRegistrationTable: "ft-class-registration-table-${self:provider.stage}"
+
+  customDomain:
+    domainName: "api.${file(../common-config.yml):domain}"
+    stage: ${opt:stage, 'dev'}
+    certificateName: '*.${${file(../common-config.yml):domain}'
+    createRoute53Record: true
+    endpointType: REGIONAL
+    securityPolicy: tls_1_2
+    apiType: rest
