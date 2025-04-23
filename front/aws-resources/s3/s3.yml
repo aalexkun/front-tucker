@@ -6,3 +6,25 @@ Resources:
     DeletionPolicy: Retain  # preserve the ressource if the stack is deleted
     Properties:
       BucketName: ${self:custom.distributionBucket}
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+  MyBucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket:
+        Ref: 'S3Bucket'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: 'S3Bucket'
+                  - '/*'

@@ -1,31 +1,31 @@
-org: ${file(../common-config.yml):org
-service: ${file(../common-config.yml):service
+org: ${file(../common-config.yml):org}
+service: ${file(../common-config.yml):service}
 app: tucker
 
-frameworkVersion: ${file(../common-config.yml):frameworkVersion
-configValidationMode: ${file(../common-config.yml):configValidationMode
+frameworkVersion: ">=4"
+configValidationMode: ${file(../common-config.yml):configValidationMode}
 
 provider:
   name: aws
-  region: ${file(../common-config.yml):region
+  region: ${file(../common-config.yml):region}
   stage: ${opt:stage, 'dev'}
   stackTags:
     app: tucker
     service: front-tucker
   memorySize: 128   # As small as possible
   timeout: 10   # Latency should not be more than 5 s
-  stackName: ${self:service}-${self:provider.stage}
+  stackName: ${self:service}-${self:app}-${self:provider.stage}
   versionFunctions: false
-  logRetentionInDays: 15 # CloudWatch log retention period
+#  logRetentionInDays: 15 # CloudWatch log retention period
 
   # Api Gateway Quota to protect against cost surge.
-  usagePlan:
-    quota:
-      limit: 5000
-      period: MONTH
-    throttle:
-      burstLimit: 50
-      rateLimit: 20
+#  usagePlan:
+#    quota:
+#      limit: 5000
+#      period: MONTH
+#    throttle:
+#      burstLimit: 50
+#      rateLimit: 20
 
   # DB
   iamRoleStatements:
@@ -51,6 +51,16 @@ provider:
 resources:
   - ${file(aws-resources/dynamo-db/application-table.yml)}
 
+functions:
+  ping:
+    runtime: nodejs22.x
+    handler: app/handler/gateway.ping
+    memorySize: 128
+    events:
+      - http:
+          path: /
+          method: ANY
+
 plugins:
   - serverless-domain-manager
 
@@ -61,7 +71,9 @@ custom:
   customDomain:
     domainName: "api.${file(../common-config.yml):domain}"
     stage: ${opt:stage, 'dev'}
-    certificateName: '*.${${file(../common-config.yml):domain}'
+    hostedZoneId: Z094454117QPI2R4W783E
+    allowPathMatching: true
+    certificateName: "*.${file(../common-config.yml):domain}"
     createRoute53Record: true
     endpointType: REGIONAL
     securityPolicy: tls_1_2

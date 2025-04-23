@@ -1,9 +1,11 @@
 Resources:
   CloudFrontDistribution:
-    Enabled: true
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:216667859283:certificate/3efbc947-1b69-46a2-ad05-b06a02233973
+          SslSupportMethod: sni-only
         DefaultRootObject: index.html
         Restrictions:
           GeoRestriction:
