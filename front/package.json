@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync:client": "serverless client deploy",
+    "build:client": "npm run build --prefix app",
+    "deploy:cloudfront": "serverless deploy",
+    "invalidate:cache": "node aws-resources/cloudfront/invalidate-cache.js ",
+    "deploy:client": "npm-run-all -s build:client \"sync:client -- --stage={1}\" \"invalidate:cache -- --stage={1}\" --"
   },
   "author": "Alexandre Tremblay",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
     "serverless-finch": "^4.0.4"
   }
 }

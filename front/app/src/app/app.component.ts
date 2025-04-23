@@ -1,20 +1,41 @@
 import {Component, inject} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {LoginButtonComponent} from './components/login-button/login-button.component';
-import {AuthService} from '@auth0/auth0-angular';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {LogoutButtonComponent} from './components/logout-button/logout-button.component';
-import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {MenuComponent} from './layout/menu/menu.component';
+import {LayoutComponent} from './layout/layout.component';
+import {NavigationEnd, Router} from '@angular/router';
+import {distinctUntilChanged, filter} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoginButtonComponent, LogoutButtonComponent, UserProfileComponent],
+  imports: [ MenuComponent, LayoutComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'front';
+  private router = inject(Router);
 
-  private auth = inject(AuthService);
-  protected isAuth = toSignal(this.auth.isAuthenticated$)
+
+  protected isMenuOpen = false;
+  protected title = 'My Sug';
+
+
+  constructor() {
+    /** Listen on Navigation Change and close the menu if Open **/
+    this.router.events.pipe(
+      distinctUntilChanged(),
+      filter((x) => x instanceof NavigationEnd ),
+      takeUntilDestroyed(),
+    ).subscribe(this.closeMenu.bind(this))
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
+
 }
