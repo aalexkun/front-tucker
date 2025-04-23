@@ -57,6 +57,17 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "localhost": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.localhost.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -69,9 +80,12 @@
             },
             "development": {
               "buildTarget": "front:build:development"
+            },
+            "localhost": {
+              "buildTarget": "front:build:localhost"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "localhost"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

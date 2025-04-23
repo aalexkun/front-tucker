@@ -1,7 +1,7 @@
 export const environment = {
   auth0: {
     domain: 'my-sug.au.auth0.com',
-    clientId: 'qWfVjyHiGSBjpWjP6G8pAz5MLJLCRyop',
+    clientId: 'bbuL2ExqXElxXSeQdkuT0wCRBR05IxLY',
   },
   production: false
 };
