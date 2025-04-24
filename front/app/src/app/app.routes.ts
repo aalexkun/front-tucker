@@ -1,5 +1,5 @@
 import { Routes} from '@angular/router';
-import {MySugRoutes} from './libs/navigation';
+import {navigationRoute} from './libs/navigation';
 import {ErrorComponent} from './routes/error/error.component';
 import {ProfileComponent} from './routes/profile/profile.component';
 import {AuthGuard} from '@auth0/auth0-angular';
@@ -7,35 +7,47 @@ import {AgendaComponent} from './routes/agenda/agenda.component';
 import {LoginComponent} from './routes/login/login.component';
 import {UnauthedGuardService} from './services/unauthed.guard.service';
 import {RedirectComponent} from './routes/redirect/redirect.component';
+import {RegisterComponent} from './components/register/register.component';
+import {NotificationComponent} from './components/notification/notification.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: `/${MySugRoutes.welcome.path}`
+    redirectTo: `/redirect`
   },
   {
-    path: MySugRoutes.welcome.path,
+    path: 'redirect',
     component: RedirectComponent,
     canActivate: [UnauthedGuardService]
   },
   {
-    path: MySugRoutes.login.path,
+    path: 'login',
     component: LoginComponent,
   },
   {
-    path: MySugRoutes.agenda.path,
+    path: navigationRoute.agenda.path,
     component: AgendaComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: MySugRoutes.profile.path,
+    path: navigationRoute.register.path,
+    component: RegisterComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: navigationRoute.profile.path,
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: MySugRoutes.error.path,
-    component: ErrorComponent,
+    path: navigationRoute.notification.path,
+    component: NotificationComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'error',
+    component: ErrorComponent,
+  },
+
 ];

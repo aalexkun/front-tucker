@@ -4,7 +4,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {combineLatest, distinctUntilChanged, filter} from 'rxjs';
 import {NavigationEnd, Router} from '@angular/router';
 
-interface SugUser extends User{
+export interface SugUser extends User{
   badge: string;
 }
 

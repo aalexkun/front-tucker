@@ -1,15 +1,14 @@
 import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {FooterComponent} from './footer/footer.component';
-import {MenuComponent} from './menu/menu.component';
+import {NavBarComponent} from './nav-bar/nav-bar.component';
+
 
 
 @Component({
   selector: 'app-layout',
   imports: [
     RouterOutlet,
-    FooterComponent,
-    MenuComponent
+    NavBarComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'

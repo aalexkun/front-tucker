@@ -1,1 +1,36 @@
-<p>profile works!</p>
+
+<!-- Use padding and center content -->
+<div class="p-4 flex flex-col items-center">
+
+  <h2 class="text-2xl font-bold mb-6">Profile</h2>
+
+  <!-- Use *ngIf to only display content when user is authenticated -->
+  <div class="text-center">
+
+    <!-- Profile Picture -->
+    <img *ngIf="user.picture" [src]="user.picture" alt="Profile Picture" class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-gray-300">
+    <div *ngIf="!user.picture" class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-gray-300 bg-gray-200 flex items-center justify-center text-gray-500">
+      No Pic
+    </div>
+
+    <!-- User Name -->
+    <p class="text-xl font-semibold">{{ user.name }}</p>
+
+    <!-- User Email -->
+    <p class="text-gray-600 mt-1">{{ user.email }}</p>
+
+    <!-- User Badge (from your SugUser interface) -->
+    <p class="mt-2">
+      <span class="inline-block bg-blue-200 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+        {{ user.badge }}
+      </span>
+    </p>
+
+
+    <app-logout-button></app-logout-button>
+
+  </div>
+
+
+
+</div>
