@@ -1,11 +1,54 @@
-<div class="flex flex-col pt-12 min-h-screen">
+<div class="flex h-screen w-screen overflow-hidden">
 
-  <div class="flex flex-col flex-grow">
-    <div class="flex-grow p-6 bg-gray-100">
-      <p>Your main application content goes here.</p>
-      <router-outlet></router-outlet>
+  <app-menu
+    [isMenuOpen]="isMenuOpen"
+    [class.translate-x-0]="isMenuOpen"
+    [class.-translate-x-full]="!isMenuOpen"
+    class="fixed top-0 left-0 z-40 w-64 h-screen bg-gray-800 text-white shadow-lg transition-transform duration-300 ease-in-out">
+  </app-menu>
+
+
+
+  <main
+    [class.ml-0]="!isMenuOpen"
+    [class.lg:ml-0]="true"
+    [class.ml-64]="isMenuOpen"
+    class="flex-1 overflow-y-auto transition-all duration-150 ease-in-out">
+
+
+
+    <div class="p-4">
+      <button
+        aria-label="Toggle menu"
+        class="fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        (click)="toggleMenu()">
+
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          @if (isMenuOpen) {
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          } @else {
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          }
+        </svg>
+      </button>
+      <div class="fixed top-4 left-1/2 -translate-x-1/2">
+        <!-- Content of your centered div -->
+        {{this.title}}
+      </div>
+
+      <div class="flex flex-col pt-12 min-h-screen">
+
+        <div class="flex flex-col flex-grow">
+          <div class="flex-grow p-6 bg-gray-100">
+            <p>Your main application content goes here.</p>
+            <router-outlet></router-outlet>
+          </div>
+
+          <app-footer></app-footer>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <app-footer></app-footer>
-  </div>
 </div>
+
