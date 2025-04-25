@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sync:client": "serverless client deploy",
+    "sync:client": "serverless client deploy --no-confirm",
     "build:client": "npm run build --prefix app",
     "deploy:cloudfront": "serverless deploy",
     "invalidate:cache": "node aws-resources/cloudfront/invalidate-cache.js ",
