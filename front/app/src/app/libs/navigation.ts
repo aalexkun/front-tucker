@@ -8,11 +8,13 @@ export interface NavigationRoute extends Route  {
   title: string
 }
 
+export const defaultRoute: routeName = 'agenda';
+
 export const navigationRoute : Record<routeName, NavigationRoute> = {
   agenda: {
     path: 'agenda',
-    linkText: 'My Class',
-    title: 'My Class',
+    linkText: 'Classes',
+    title: 'Classes',
     icon: 'icons/calendar.svg',
   },
   register: {
@@ -24,13 +26,30 @@ export const navigationRoute : Record<routeName, NavigationRoute> = {
   notification: {
     path: 'notification',
     linkText: 'Notification',
-    title: 'My notifications',
+    title: 'Notification',
     icon: 'icons/alert.svg',
   },
   profile:  {
     path: 'profile',
     linkText: 'Profile',
-    title: 'My Profile' ,
+    title: 'Profile' ,
     icon: 'icons/profile.svg',
   }
 } as const;
+
+
+export const getCurrentRouteTitle = (routerUrl: string): string => {
+
+  switch(routerUrl){
+
+    case `/${navigationRoute.profile.path}`: return navigationRoute.profile.title;
+    case `/${navigationRoute.agenda.path}`: return navigationRoute.agenda.title;
+    case `/${navigationRoute.register.path}`: return navigationRoute.register.title;
+    case `/${navigationRoute.notification.path}`: return navigationRoute.notification.title;
+    default: {
+      console.error(`getCurrentRouteTitle : unknown route ${routerUrl}`);
+      return '';
+    }
+  }
+
+}

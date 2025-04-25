@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
 import {Router, UrlTree} from '@angular/router';
 import {AuthService} from '@auth0/auth0-angular';
+import {defaultRoute} from '../libs/navigation';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UnauthedGuardService {
     return this.authService.isAuthenticated$.pipe(
       map(isAuth => {
         if (isAuth) {
-          return this.router.createUrlTree(['/agenda']);
+          return this.router.createUrlTree([`/${defaultRoute}`]);
         } else {
           return this.router.createUrlTree(['/login']);
         }

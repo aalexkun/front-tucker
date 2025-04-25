@@ -57,7 +57,7 @@ export class StateService {
         user: {
           name: user.name,
           email: user.email,
-          badge: 'admin',
+          badge: 'Admin',
           icon: user.picture
         }
       })

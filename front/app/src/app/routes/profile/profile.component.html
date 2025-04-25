@@ -9,14 +9,24 @@
           </div>
         </div>
       </div>
-      <div class="stat-value">Profile</div>
+
       <div class="stat-title">{{ user.name }}</div>
       <div class="stat-desc text-secondary">{{ user.email }}</div>
 
 
     </div>
     <div class="stat">
-      <div class="stat-desc badge badge-info p-t-5">{{ user.badge }}</div>
+      <ul class="flex flex-wrap">
+        <li class="p-2">
+          <div class="stat-desc badge badge-info">{{ user.badge }}</div>
+        </li>
+        <li class="p-2">
+          <div class="stat-desc badge badge-error text-accent">Team-X</div>
+        </li>
+        <li class="p-2">
+          <div class="stat-desc badge badge-success">Sugian</div>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="divider"></div>

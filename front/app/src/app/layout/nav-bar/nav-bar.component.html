@@ -1,18 +1,12 @@
-<nav class="max-w-md mx-auto ">
-  <ul class="flex justify-around items-center">
-    @for ( route of routes; track $index;) {
-      <li class="w-1/4">
-        <a [routerLink]="route.path"
-           [routerLinkActive]="'bg-base-100 rounded-t-lg'"
-        class="flex flex-col items-center btn btn-xl border-solid border-1">
-          <img src="{{route.icon}}" alt="{{route.title}}" class="w-6 h-6 mb-1">
-          <span class="text-xs">{{route.linkText}}</span>
-        </a>
+<div class="navbar shadow-sm">
+  <div class="flex-1">
+    <div class="stat-value">{{ title }}</div>
+  </div>
+  <div class="flex gap-2">
+    <ul class="menu menu-horizontal">
+      <li>
+        <app-logout-button></app-logout-button>
       </li>
-    }
-  </ul>
-</nav>
-
-
-
-
+    </ul>
+  </div>
+</div>

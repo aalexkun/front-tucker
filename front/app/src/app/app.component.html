@@ -1,5 +1,7 @@
 @if (stateService.state().isAuthenticated){
   <app-layout></app-layout>
 } @else {
-  <router-outlet></router-outlet>
+  <main class="h-screen w-screen bg-base-200">
+    <router-outlet></router-outlet>
+  </main>
 }
