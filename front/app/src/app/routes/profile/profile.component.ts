@@ -5,7 +5,7 @@ import {StateService, SugUser} from '../../services/state.service';
 @Component({
   selector: 'app-profile',
   imports: [
-    LogoutButtonComponent
+
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
