@@ -19,7 +19,6 @@ export class NavBarComponent {
   constructor() {
 
     this.router.events.pipe(
-      distinctUntilChanged(),
       filter((x) => x instanceof NavigationEnd),
       takeUntilDestroyed()
     ).subscribe(
@@ -28,7 +27,4 @@ export class NavBarComponent {
       }
     )
   }
-
-
-
 }

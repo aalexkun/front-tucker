@@ -6,9 +6,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "sync:client": "serverless client deploy --no-confirm",
     "build:client": "npm run build --prefix app",
+    "bump:client": "npm run bump --prefix app",
     "deploy:cloudfront": "serverless deploy",
     "invalidate:cache": "node aws-resources/cloudfront/invalidate-cache.js ",
-    "deploy:client": "npm-run-all -s build:client \"sync:client -- --stage={1}\" \"invalidate:cache -- --stage={1}\" --"
+    "deploy:client": "npm-run-all -s bump:client build:client \"sync:client -- --stage={1}\" \"invalidate:cache -- --stage={1}\" --"
   },
   "author": "Alexandre Tremblay",
   "license": "ISC",

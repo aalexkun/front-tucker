@@ -1,12 +1,13 @@
 {
   "name": "front",
-  "version": "0.0.0",
+  "version": "2025.4.2-6.1913",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration localhost",
-    "test": "ng test"
+    "test": "ng test",
+    "bump": "npm version $(date +'%Y.%m.%d.%H%M') --allow-same-version"
   },
   "private": true,
   "dependencies": {
