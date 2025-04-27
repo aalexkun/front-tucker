@@ -1,0 +1,12 @@
+agendaApiRoute:
+  handler: src/api/express/index.handler
+  events:
+    - http:
+        path: "/v1/agenda"
+        method: GET
+        cors: ${file(aws-resources/api-gateway/cors/cors.${opt:stage, 'dev'}.yml):cors}
+        authorizer:
+          name: jwtAuth
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 120
+          type: request

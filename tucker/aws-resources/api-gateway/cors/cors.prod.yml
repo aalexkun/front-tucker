@@ -1,0 +1,14 @@
+cors:
+  origins:
+    - 'https://my.sug-app.link'
+  headers:
+    - Content-Type
+    - X-Amz-Date
+    - Authorization
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+    - X-Amzn-Trace-Id
+    - Device-Type # gloss get bitwarden method wrapper
+    - pragma # gloss get bitwarden method wrapper
+    - Cache-Control # gloss get bitwarden method wrapper

@@ -1,0 +1,13 @@
+cors:
+  origins:
+    - 'https://dev.sug-app.link'
+    - 'https://localhost:4200'
+
+  headers:
+    - Content-Type
+    - X-Amz-Date
+    - Authorization
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+    - X-Amzn-Trace-Id

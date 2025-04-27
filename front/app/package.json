@@ -1,6 +1,6 @@
 {
   "name": "front",
-  "version": "2025.4.2-6.1913",
+  "version": "2025.4.2-7.1555",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

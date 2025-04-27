@@ -43,6 +43,8 @@ export class StateService {
       filter((x) => x instanceof NavigationEnd ),
       takeUntilDestroyed(),
     ).subscribe(this.onRouteChanged.bind(this))
+
+    this.auth.idTokenClaims$.subscribe((x) => console.log(x));
   }
 
   onRouteChanged() {

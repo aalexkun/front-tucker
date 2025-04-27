@@ -6,6 +6,7 @@ Resources:
         ViewerCertificate:
           AcmCertificateArn: arn:aws:acm:us-east-1:216667859283:certificate/3efbc947-1b69-46a2-ad05-b06a02233973
           SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2018
         DefaultRootObject: index.html
         Restrictions:
           GeoRestriction:

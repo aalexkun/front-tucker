@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  --animate-slow-spin: spin 8s infinite;
+  --animate-slow-spin: spin 20s infinite;
 
 }
 @plugin "daisyui" {

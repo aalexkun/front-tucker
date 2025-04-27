@@ -24,6 +24,11 @@ resources:
 
 functions:
   cloudfrontHeaders:
+    package:
+      patterns:
+        - '!**'
+        - 'aws-resources/cloudfront/cloudfront.js'
+      individually: true
     handler: aws-resources/cloudfront/cloudfront.handler
     events:
       - cloudFront:

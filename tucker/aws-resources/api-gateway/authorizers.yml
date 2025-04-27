@@ -1,0 +1,2 @@
+jwtAuth:
+  handler: app/handler/authorizers/jwt.auth

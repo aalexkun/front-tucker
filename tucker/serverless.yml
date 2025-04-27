@@ -16,7 +16,12 @@ provider:
   timeout: 10   # Latency should not be more than 5 s
   stackName: ${self:service}-${self:app}-${self:provider.stage}
   versionFunctions: false
-#  logRetentionInDays: 15 # CloudWatch log retention period
+
+  environment:
+    API_STAGE: ${self:provider.stage}
+    ACCOUNT_ID: ${aws:accountId}
+
+  #  logRetentionInDays: 15 # CloudWatch log retention period
 
   # Api Gateway Quota to protect against cost surge.
 #  usagePlan:
@@ -27,46 +32,16 @@ provider:
 #      burstLimit: 50
 #      rateLimit: 20
 
-  # DB
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - "dynamodb:PutItem"
-        - "dynamodb:GetItem"
-        - "dynamodb:UpdateItem"
-        - "dynamodb:DeleteItem"
-        - "dynamodb:BatchGetItem"
-        - "dynamodb:BatchWriteItem"
-        - "dynamodb:Query"
-        - "dynamodb:Scan"
-        - "dynamodb:PartiQLSelect"
-      Resource:
-        - Fn::GetAtt: [ ClassRegistrationTable, Arn ]
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-      Resource: !Sub "arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.dynamoDB.classRegistrationTable}/index/*"
-
-resources:
-  - ${file(aws-resources/dynamo-db/application-table.yml)}
-
 functions:
-  ping:
-    runtime: nodejs22.x
-    handler: app/handler/gateway.ping
-    memorySize: 128
-    events:
-      - http:
-          path: /
-          method: ANY
+  - ${file(aws-resources/api-gateway/authorizers.yml)}
+  - ${file(aws-resources/api-gateway/agenda-routes.yml)}
 
 plugins:
   - serverless-domain-manager
 
 custom:
-  dynamoDB:
-    classRegistrationTable: "ft-class-registration-table-${self:provider.stage}"
+#  dynamoDB:
+#    classRegistrationTable: "ft-class-registration-table-${self:provider.stage}"
 
   customDomain:
     domainName: "api.${file(../common-config.yml):domain}"
