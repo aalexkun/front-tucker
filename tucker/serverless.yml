@@ -52,10 +52,9 @@ custom:
 #    classRegistrationTable: "ft-class-registration-table-${self:provider.stage}"
 
   customDomain:
-    domainName: "api.${file(../common-config.yml):domain}"
+    domainName: "${opt:stage, 'dev'}-api.${file(../common-config.yml):domain}"
     stage: ${opt:stage, 'dev'}
     hostedZoneId: Z094454117QPI2R4W783E
-    allowPathMatching: true
     certificateName: "*.${file(../common-config.yml):domain}"
     createRoute53Record: true
     endpointType: REGIONAL

@@ -10,7 +10,7 @@ export class ApiService {
 
   private http = inject(HttpClient);
   private auth = inject(AuthService);
-  private apiUrl = 'https://api.sug-app.link/dev/v1';
+  private apiUrl = 'https://dev-api.sug-app.link/v1';
 
   private getAuthentificationToken(): Observable<string | undefined> {
     return this.auth.idTokenClaims$.pipe(

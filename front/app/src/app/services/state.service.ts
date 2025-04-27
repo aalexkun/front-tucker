@@ -69,19 +69,15 @@ export class StateService {
   onTokenChange(idToken: IdToken | null | undefined) {
 
     if(idToken){
-      debugger;
       this.api.getAgenda().subscribe(agenda => {
         this._agenda.set({
           is: 'AgendaStateReady',
           week: 'Text',
           items: []
         })
-        debugger;
-
       })
 
     } else {
-      debugger;
 
     }
   }

@@ -1,5 +1,5 @@
-AgendaGET:
-  handler: app/handler/routes/agenda.getAgenda
+expressApi:
+  handler: app/express-api/api.handler
   events:
     - http:
         path: "/v1/agenda"
@@ -10,20 +10,3 @@ AgendaGET:
           identitySource: method.request.header.Authorization
           resultTtlInSeconds: 120
           type: request
-
-AgendaPATCH:
-  handler: app/handler/routes/agenda.pathAgenda
-  events:
-    - http:
-        path: "/v1/agenda/{registrationId}"
-        method: PATCH
-        cors: ${file(aws-resources/api-gateway/cors/cors.${opt:stage, 'dev'}.yml):cors}
-        authorizer:
-          name: jwtAuth
-          identitySource: method.request.header.Authorization
-          resultTtlInSeconds: 120
-          type: request
-        request:
-          parameters:
-            paths:
-              registrationId: true

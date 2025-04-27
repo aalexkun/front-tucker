@@ -18,6 +18,8 @@ provider:
   stackName: ${self:service}-${self:app}-${self:provider.stage}
   versionFunctions: false
   logRetentionInDays: 3
+  logs:
+    frameworkLambda: false
 
 resources:
   - ${file(aws-resources/s3/s3.yml)}
@@ -41,6 +43,8 @@ plugins:
 
 custom:
   distributionBucket: "front-tucker-web-${self:provider.stage}"
+  enterprise:
+    collectLambdaLogs: false
   domain:
     dev: "dev.${file(../common-config.yml):domain}"
     prod: "prod.${file(../common-config.yml):domain}"
