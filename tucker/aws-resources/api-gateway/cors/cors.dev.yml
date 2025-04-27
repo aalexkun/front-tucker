@@ -1,8 +1,8 @@
 cors:
   origins:
     - 'https://dev.sug-app.link'
-    - 'https://localhost:4200'
-
+    - 'http://localhost:4200'
+    - 'http://localhost'
   headers:
     - Content-Type
     - X-Amz-Date

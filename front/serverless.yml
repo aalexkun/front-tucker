@@ -17,6 +17,7 @@ provider:
   timeout: 15 # Increase Lambda timeout for long-running tasks
   stackName: ${self:service}-${self:app}-${self:provider.stage}
   versionFunctions: false
+  logRetentionInDays: 3
 
 resources:
   - ${file(aws-resources/s3/s3.yml)}

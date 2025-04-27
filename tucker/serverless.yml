@@ -5,6 +5,13 @@ app: tucker
 frameworkVersion: ">=4"
 configValidationMode: ${file(../common-config.yml):configValidationMode}
 
+# Remove files that
+package:
+  patterns:
+    - '!.idea/**'
+    - '!aws-resources/**'
+    - '!.gitignore/**'
+
 provider:
   name: aws
   region: ${file(../common-config.yml):region}
@@ -13,24 +20,25 @@ provider:
     app: tucker
     service: front-tucker
   memorySize: 128   # As small as possible
-  timeout: 10   # Latency should not be more than 5 s
+  timeout: 15   # Latency should not be more than 5 s
   stackName: ${self:service}-${self:app}-${self:provider.stage}
   versionFunctions: false
+  logRetentionInDays: 3
+
+  apiGateway:
+    usagePlan:
+      quota:
+        limit: 5000
+        period: MONTH
+      throttle:
+        burstLimit: 50
+        rateLimit: 20
 
   environment:
     API_STAGE: ${self:provider.stage}
     ACCOUNT_ID: ${aws:accountId}
 
-  #  logRetentionInDays: 15 # CloudWatch log retention period
 
-  # Api Gateway Quota to protect against cost surge.
-#  usagePlan:
-#    quota:
-#      limit: 5000
-#      period: MONTH
-#    throttle:
-#      burstLimit: 50
-#      rateLimit: 20
 
 functions:
   - ${file(aws-resources/api-gateway/authorizers.yml)}

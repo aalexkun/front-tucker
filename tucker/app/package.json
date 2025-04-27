@@ -1,7 +1,8 @@
 {
   "name": "node-tucker",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "",
+  "type": "module",
   "directories": {
     "lib": "lib"
   },
