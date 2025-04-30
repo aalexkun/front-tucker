@@ -1,7 +1,7 @@
 {
   "name": "My Sug App",
   "short_name": "Sug",
-  "theme_color": "#1976d2",
+  "theme_color": "#114577",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

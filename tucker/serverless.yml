@@ -54,6 +54,8 @@ custom:
   customDomain:
     domainName: "${opt:stage, 'dev'}-api.${file(../common-config.yml):domain}"
     stage: ${opt:stage, 'dev'}
+    # Hosted Zone id in Route53,
+    # domain name need to be registered manually, certificate need to be generated manually and attach to the zone id
     hostedZoneId: Z094454117QPI2R4W783E
     certificateName: "*.${file(../common-config.yml):domain}"
     createRoute53Record: true
