@@ -1,0 +1,12 @@
+<div class="modal-box">
+  <h3 class="text-lg font-bold">{{ modalTitle }}</h3>
+  <p class="py-4">{{ modalBody }}</p>
+  <div class="modal-action">
+    <form method="dialog">
+      @for(action of modalActions; track $index ) {
+        <button (click)="action.action()" class="btn">{{ action.label }}</button>
+      }
+    </form>
+  </div>
+</div>
+
