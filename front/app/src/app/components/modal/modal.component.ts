@@ -16,6 +16,6 @@ export class ModalComponent {
   @Input() modalBody: string = 'Modal Body';
   @Input() modalFooter: string = 'Modal Footer';
   @Input() modalSize: string = 'modal-lg';
-  @Input() modalActions: ModalAction[] = [];
+  @Input() modalActions: ModalAction[] | null = null;
 
 }

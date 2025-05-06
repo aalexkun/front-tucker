@@ -13,10 +13,6 @@ export class AgendaComponent {
 
   private modalActionItemId: number = NaN;
 
-  protected waitingList = signal([
-
-  ])
-
   protected classes = signal([
     {
       id: 1,

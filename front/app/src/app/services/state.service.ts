@@ -7,7 +7,7 @@ import {AgendaStateType} from './state.agenda.type';
 import {ApiService} from './api.service';
 
 export interface SugUser extends User {
-  badge: string;
+  badges: string[];
 }
 
 interface UnauthorizedState {
@@ -90,8 +90,8 @@ export class StateService {
         user: {
           name: user.name,
           email: user.email,
-          badge: 'Admin',
-          icon: user.picture
+          badges: ['Admin','Gym-X', 'Sugian'],
+          picture: user.picture ?? ''
         }
       })
     } else {

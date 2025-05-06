@@ -8,7 +8,7 @@ import {LoginComponent} from './routes/login/login.component';
 import {UnauthedGuardService} from './services/unauthed.guard.service';
 import {RedirectComponent} from './routes/redirect/redirect.component';
 import {RegisterComponent} from './routes/register/register.component';
-import {NotificationComponent} from './components/notification/notification.component';
+import {NotificationComponent} from './routes/notification/notification.component';
 
 export const routes: Routes = [
   {

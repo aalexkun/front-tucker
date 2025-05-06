@@ -26,5 +26,19 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "user-pictures-cache",
+      "urls": [
+        "https://*/**/*.(png|jpg|jpeg|gif|svg|webp)"
+      ],
+      "cacheConfig": {
+        "maxSize": 50,
+        "maxAge": "7d",
+        "strategy": "performance"
+      }
+    }
   ]
+
 }

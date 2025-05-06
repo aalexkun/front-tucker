@@ -5,7 +5,7 @@
       <div class="stat-figure text-secondary">
         <div class="avatar online">
           <div class="w-16 rounded-full">
-            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            <img src="{{user.picture}}" />
           </div>
         </div>
       </div>
@@ -13,19 +13,32 @@
       <div class="stat-title">{{ user.name }}</div>
       <div class="stat-desc text-secondary">{{ user.email }}</div>
 
-
     </div>
     <div class="stat">
       <ul class="flex flex-wrap">
-        <li class="p-2">
-          <div class="stat-desc badge badge-info">{{ user.badge }}</div>
-        </li>
-        <li class="p-2">
-          <div class="stat-desc badge badge-error text-accent">Team-X</div>
-        </li>
-        <li class="p-2">
-          <div class="stat-desc badge badge-success">Sugian</div>
-        </li>
+        @for ( badge of user.badges; track $index;){
+        @switch ( badge) {
+          @case ('Admin') {
+            <li class="p-2">
+              <div class="stat-desc badge badge-info">Admin</div>
+            </li>
+          }
+          @case ('Member') {
+
+          }
+          @case ('Gym-X') {
+            <li class="p-2">
+              <div class="stat-desc badge badge-error text-accent">Gym-X</div>
+            </li>
+          }
+          @case ('Sugian') {
+            <li class="p-2">
+              <div class="stat-desc badge badge-success">Sugian</div>
+            </li>
+          }
+        }
+        }
+
       </ul>
     </div>
   </div>
@@ -34,12 +47,22 @@
     <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4">
       <legend class="fieldset-legend">Membership</legend>
 
-
       <label class="label">Membership</label>
       <input type="text" class="input" placeholder="65456646556"/>
 
       <label class="label">Who to call if I'm crooked?</label>
-      <input type="text" class="input" placeholder="No one... nobody loves me" />
+      <input type="text" class="input" placeholder="Only God can saves me" />
+
+
+      <legend class="fieldset-legend">Communication options</legend>
+      <label class="label">
+        <input type="checkbox" checked="checked" class="checkbox" />
+        Push Notification
+      </label>
+      <label class="label">
+        <input type="checkbox" checked="checked" class="checkbox" />
+        Email Notification
+      </label>
 
     </fieldset>
   </div>

@@ -16,7 +16,9 @@
       </li>
     }
   }
+</ul>
 
+<ul class="list bg-base-100 rounded-box shadow-md mt-10">
   <li class="p-4 pb-2 text-xs opacity-80 tracking-wide">On Waiting List</li>
 
 
@@ -28,22 +30,19 @@
           <div>{{ myClass.day }}</div>
           <div class="text-xs uppercase font-semibold opacity-60">{{ myClass.name }}</div>
         </div>
-        <button (click)="openModal(confirmCancelModal, myClass.id)" class="btn btn-square btn-ghost">
-          <img class="size-5"  src="icons/cancel.svg">
-        </button>
+
         <div class="indicator">
           <span class="indicator-item badge badge-secondary">{{ myClass.registrationPosition * -1 }}</span>
-          <button class="btn btn-square btn-ghost">
+          <button (click)="openModal(confirmCancelModal, myClass.id)" class="btn btn-square btn-ghost">
+            <img class="size-5"  src="icons/cancel.svg">
+          </button>
+          <button (click)="openModal(showList, myClass.id)" class="btn btn-square btn-ghost">
             <img class="size-5" src="icons/clock.svg">
           </button>
         </div>
-
       </li>
     }
   }
-
-
-
 </ul>
 
 <dialog #confirmCancelModal class="modal">
@@ -63,3 +62,9 @@
 </dialog>
 
 
+<dialog #showList class="modal">
+  <app-modal
+    [modalTitle]="'Waiting List'"
+    [modalBody]="'Robert, Adrian, Lisa, Rosé, YOU, and Bob'"
+  ></app-modal>
+</dialog>
